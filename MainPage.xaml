@@ -1,0 +1,11 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LifeManagementApp.MainPage">
+
+    <StackLayout Padding="20">
+        <Label x:Name="minTempLabel" Text="Min Temp: " FontSize="Large" />
+        <Label x:Name="maxTempLabel" Text="Max Temp: " FontSize="Large" />
+        <Label x:Name="rainLabel" Text="Rain: " FontSize="Large" />
+        <Label x:Name="windAlertLabel" Text="Wind Alert: " FontSize="Large" TextColor="Black" />
+    </StackLayout>
+</ContentPage>
