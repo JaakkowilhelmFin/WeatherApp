@@ -4,7 +4,7 @@ using System.Text.Json;
 using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 
-namespace LifeManagementApp
+namespace WeatherApp
 {
     public partial class MainPage : ContentPage
     {
@@ -65,14 +65,14 @@ namespace LifeManagementApp
     // Model for deserializing JSON response
     public class WeatherResponse
     {
-        public Daily Daily { get; set; }
+        public Daily? Daily { get; set; }
     }
 
     public class Daily
     {
-        public List<double> Temperature2mMin { get; set; }
-        public List<double> Temperature2mMax { get; set; }
-        public List<double> PrecipitationSum { get; set; }
-        public List<double> Windspeed10mMax { get; set; }
+        public List<double>? Temperature2mMin { get; set; }
+        public List<double>? Temperature2mMax { get; set; }
+        public List<double>? PrecipitationSum { get; set; }
+        public List<double>? Windspeed10mMax { get; set; }
     }
 }
