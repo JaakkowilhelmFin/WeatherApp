@@ -18,12 +18,12 @@ namespace WeatherApp
 
         public async void GetWeatherData()
         {
-            double latitude = 35.6895;  // Default latitude 
-            double longitude = 139.6917;  // Default longitude
+            double latitude = 35.6895;   
+            double longitude = 139.6917;  
 
             try
             {
-                // GPS-based location retrieval code here (set latitude/longitude based on user location)
+                
 
                 string apiUrl = $"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max&timezone=auto";
                 var response = await _httpClient.GetAsync(apiUrl);
