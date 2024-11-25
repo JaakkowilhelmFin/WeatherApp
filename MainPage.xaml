@@ -3,9 +3,8 @@
              x:Class="WeatherApp.MainPage">
 
     <StackLayout Padding="20">
-        <Label x:Name="minTempLabel" Text="Min Temp: " FontSize="Large" />
-        <Label x:Name="maxTempLabel" Text="Max Temp: " FontSize="Large" />
-        <Label x:Name="rainLabel" Text="Rain: " FontSize="Large" />
-        <Label x:Name="windAlertLabel" Text="Wind Alert: " FontSize="Large" TextColor="Black" />
+        <Label x:Name="minTempLabel" Text="Min Temp: " FontSize="18" />
+        <Label x:Name="maxTempLabel" Text="Max Temp: " FontSize="18" />
+        <Label x:Name="rainLabel" Text="Rain: " FontSize="18" />
     </StackLayout>
 </ContentPage>

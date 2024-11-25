@@ -58,10 +58,14 @@ namespace WeatherApp
 
         private async void LoadSummary()
         {
+            // Define the coordinates for the weather data (e.g., Vaasa, Finland)
+            double latitude = 63.096;
+            double longitude = 21.6158;
+
             // Load basic weather data
             try
             {
-                var weatherData = await WeatherService.GetWeatherSummary();
+                var weatherData = await WeatherService.GetWeatherSummary(latitude, longitude);
                 weatherSummaryLabel.Text = $"Min Temp: {weatherData.MinTemp}°C, Max Temp: {weatherData.MaxTemp}°C, Rain: {weatherData.Rain} mm";
             }
             catch
@@ -84,4 +88,5 @@ namespace WeatherApp
         }
     }
 }
+
 
