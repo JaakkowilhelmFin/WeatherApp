@@ -18,12 +18,23 @@ namespace WeatherApp
 
             try
             {
-                var weatherSummary = await WeatherService.GetWeatherSummary(latitude, longitude);
+                // Fetch the weather data
+                var weatherData = await WeatherService.GetWeatherData(latitude, longitude);
 
-                // Display data in UI labels
-                minTempLabel.Text = $"Min Temp: {weatherSummary.MinTemp}°C";
-                maxTempLabel.Text = $"Max Temp: {weatherSummary.MaxTemp}°C";
-                rainLabel.Text = $"Rain: {weatherSummary.Rain} mm";
+                // Display current weather (if available)
+                var current = weatherData.Current;
+                if (current != null)
+                {
+                    minTempLabel.Text = $"Current Temp: {current.Temperature2m}°C";
+                    maxTempLabel.Text = $"Wind Speed: {current.WindSpeed10m} m/s";
+                }
+
+                // Display hourly weather (first entry as an example)
+                var hourly = weatherData.Hourly;
+                if (hourly != null && hourly.Temperature2m != null && hourly.Temperature2m.Count > 0)
+                {
+                    rainLabel.Text = $"First Hour Temp: {hourly.Temperature2m[0]}°C, Humidity: {hourly.RelativeHumidity2m[0]}%";
+                }
             }
             catch (Exception ex)
             {

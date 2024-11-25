@@ -1,44 +1,3 @@
-/*using Microsoft.Maui.Controls;
-
-namespace WeatherApp
-{
-    public partial class LandingPage : ContentPage
-    {
-        public LandingPage()
-        {
-            InitializeComponent();
-            LoadSummary();
-        }
-
-        private async void LoadSummary()
-        {
-            // Load basic weather data
-            try
-            {
-                var weatherData = await WeatherService.GetWeatherSummary();
-                weatherSummaryLabel.Text = $"Min Temp: {weatherData.MinTemp}°C, Max Temp: {weatherData.MaxTemp}°C, Rain: {weatherData.Rain} mm";
-            }
-            catch
-            {
-                weatherSummaryLabel.Text = "Unable to load weather data.";
-            }
-
-            // Load todo summary
-            todoSummaryLabel.Text = $"Tasks Today: {TodoService.GetTasksCount()}";
-        }
-
-        private async void OnWeatherPageButtonClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnTodoPageButtonClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new TodoPage());
-        }
-    }
-}*/
-
 using Microsoft.Maui.Controls;
 
 namespace WeatherApp
@@ -59,18 +18,31 @@ namespace WeatherApp
         private async void LoadSummary()
         {
             // Define the coordinates for the weather data (e.g., Vaasa, Finland)
-            double latitude = 63.096;
-            double longitude = 21.6158;
+            double latitude = 63.096;   // Replace with your desired latitude
+            double longitude = 21.6158; // Replace with your desired longitude
 
-            // Load basic weather data
             try
             {
-                var weatherData = await WeatherService.GetWeatherSummary(latitude, longitude);
-                weatherSummaryLabel.Text = $"Min Temp: {weatherData.MinTemp}°C, Max Temp: {weatherData.MaxTemp}°C, Rain: {weatherData.Rain} mm";
+                // Fetch detailed weather data
+                var weatherData = await WeatherService.GetWeatherData(latitude, longitude);
+
+                // Display current weather
+                var current = weatherData.Current;
+                if (current != null)
+                {
+                    weatherSummaryLabel.Text = $"Current Temp: {current.Temperature2m}°C, Wind Speed: {current.WindSpeed10m} m/s";
+                }
+
+                // Display hourly summary (e.g., first entry)
+                var hourly = weatherData.Hourly;
+                if (hourly != null && hourly.Temperature2m != null && hourly.Temperature2m.Count > 0)
+                {
+                    weatherSummaryLabel.Text += $"\nFirst Hour Temp: {hourly.Temperature2m[0]}°C, Humidity: {hourly.RelativeHumidity2m[0]}%";
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                weatherSummaryLabel.Text = "Unable to load weather data.";
+                weatherSummaryLabel.Text = $"Unable to load weather data: {ex.Message}";
             }
 
             // Load todo summary
@@ -88,5 +60,3 @@ namespace WeatherApp
         }
     }
 }
-
-
