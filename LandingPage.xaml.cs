@@ -18,8 +18,8 @@ namespace WeatherApp
         private async void LoadSummary()
         {
             // Define the coordinates for the weather data (e.g., Vaasa, Finland)
-            double latitude = 63.096;   // Replace with your desired latitude
-            double longitude = 21.6158; // Replace with your desired longitude
+            double latitude = 63.096;   
+            double longitude = 21.6158; 
 
             try
             {

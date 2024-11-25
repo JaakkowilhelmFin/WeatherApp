@@ -13,7 +13,7 @@ namespace WeatherApp
 
         public async void GetWeatherData()
         {
-            double latitude = 63.096;  // Example: Vaasa, Finland
+            double latitude = 63.096;  
             double longitude = 21.6158;
 
             try
