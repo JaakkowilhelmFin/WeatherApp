@@ -17,23 +17,23 @@ namespace WeatherApp
 
         private async void LoadSummary()
         {
-            // Define the coordinates for the weather data (e.g., Vaasa, Finland)
+            
             double latitude = 63.096;   
             double longitude = 21.6158; 
 
             try
             {
-                // Fetch detailed weather data
+                // Fetch weather data
                 var weatherData = await WeatherService.GetWeatherData(latitude, longitude);
 
-                // Display current weather
+                //  current weather
                 var current = weatherData.Current;
                 if (current != null)
                 {
                     weatherSummaryLabel.Text = $"Current Temp: {current.Temperature2m}°C, Wind Speed: {current.WindSpeed10m} m/s";
                 }
 
-                // Display hourly summary (e.g., first entry)
+                // Display hourly summary 
                 var hourly = weatherData.Hourly;
                 if (hourly != null && hourly.Temperature2m != null && hourly.Temperature2m.Count > 0)
                 {
@@ -45,7 +45,7 @@ namespace WeatherApp
                 weatherSummaryLabel.Text = $"Unable to load weather data: {ex.Message}";
             }
 
-            // Load todo summary
+            // todo 
             todoSummaryLabel.Text = $"Tasks Today: {TodoService.GetTasksCount()}";
         }
 

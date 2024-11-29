@@ -21,7 +21,7 @@ namespace WeatherApp
                 // Fetch the weather data
                 var weatherData = await WeatherService.GetWeatherData(latitude, longitude);
 
-                // Display current weather (if available)
+                // Display current weather 
                 var current = weatherData.Current;
                 if (current != null)
                 {
@@ -29,7 +29,7 @@ namespace WeatherApp
                     maxTempLabel.Text = $"Wind Speed: {current.WindSpeed10m} m/s";
                 }
 
-                // Display hourly weather (first entry as an example)
+                // Display hourly weather 
                 var hourly = weatherData.Hourly;
                 if (hourly != null && hourly.Temperature2m != null && hourly.Temperature2m.Count > 0)
                 {
