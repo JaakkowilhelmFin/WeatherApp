@@ -2,31 +2,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.LandingPage">
 
-	<StackLayout Padding="20" Spacing="15">
-		<!-- App Header -->
-		<Label Text="WeatherApp" FontSize="24" HorizontalOptions="Center" />
+    <StackLayout Padding="20" Spacing="15">
+        <!-- App Header -->
+        <Label Text="WeatherApp" FontSize="24" HorizontalOptions="Center" />
 
-		<!-- Weather Summary Section -->
-		<Frame Padding="10" BorderColor="LightGray">
-			<Label x:Name="weatherSummaryLabel"
-                   Text="Weather Summary: Loading..."
-                   FontSize="Medium" />
-		</Frame>
-
-		<!-- Todo Summary Section -->
-		<Frame Padding="10" BorderColor="LightGray">
-			<Label x:Name="todoSummaryLabel"
+        <!-- Todo Summary Section -->
+        <Frame Padding="10" BorderColor="LightGray">
+            <Label x:Name="todoSummaryLabel"
                    Text="Tasks Today: 0"
                    FontSize="Medium" />
-		</Frame>
+        </Frame>
 
-		<!-- Navigation Buttons -->
-		<StackLayout Spacing="10">
-			<Button Text="View Detailed Weather"
+        <!-- Navigation Buttons -->
+        <StackLayout Spacing="10">
+            <Button Text="View Detailed Weather"
                     Clicked="OnWeatherPageButtonClicked" />
-			<Button Text="View Todo List"
+            <Button Text="View Todo List"
                     Clicked="OnTodoPageButtonClicked" />
-		</StackLayout>
-	</StackLayout>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>
-

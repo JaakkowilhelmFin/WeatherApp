@@ -1,60 +1,39 @@
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
-namespace WeatherApp
+public class WeatherService
 {
-    public static class WeatherService
+    private readonly HttpClient _httpClient;
+
+    public WeatherService()
     {
-        private static readonly HttpClient _httpClient = new HttpClient();
-
-        public static async Task<WeatherResponse> GetWeatherData(double latitude, double longitude)
-        {
-            string apiUrl = $"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=auto";
-
-            try
-            {
-                var response = await _httpClient.GetAsync(apiUrl);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"API Error: {response.StatusCode}, Content: {errorContent}");
-                }
-
-                var json = await response.Content.ReadAsStringAsync();
-                var weatherData = JsonSerializer.Deserialize<WeatherResponse>(json);
-                return weatherData!;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Unable to retrieve weather data: {ex.Message}");
-            }
-        }
+        _httpClient = new HttpClient();
     }
 
-    // JSON Response Model
-    public class WeatherResponse
+    public async Task<WeatherData> GetWeatherAsync(double latitude, double longitude)
     {
-        public CurrentWeather? Current { get; set; }
-        public HourlyWeather? Hourly { get; set; }
+        string url = $"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m&hourly=temperature_2m,wind_speed_1000hPa&timezone=auto&models=best_match";
+        var response = await _httpClient.GetStringAsync(url);
+        return JsonSerializer.Deserialize<WeatherData>(response);
     }
+}
 
-    public class CurrentWeather
-    {
-        public string? Time { get; set; }
-        public double Temperature2m { get; set; }
-        public double WindSpeed10m { get; set; }
-    }
+public class WeatherData
+{
+    public CurrentWeather Current { get; set; }
+    public HourlyWeather Hourly { get; set; }
+}
 
-    public class HourlyWeather
-    {
-        public List<string>? Time { get; set; }
-        public List<double>? Temperature2m { get; set; }
-        public List<double>? RelativeHumidity2m { get; set; }
-        public List<double>? WindSpeed10m { get; set; }
-    }
+public class CurrentWeather
+{
+    public double Temperature2m { get; set; }
+}
 
-    
+public class HourlyWeather
+{
+    public List<string> Time { get; set; } // Add time for hourly data
+    public List<double> Temperature2m { get; set; }
+    public List<double> WindSpeed1000hPa { get; set; }
 }

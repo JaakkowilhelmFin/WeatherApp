@@ -12,40 +12,12 @@ namespace WeatherApp
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            LoadSummary();
+            LoadTaskSummary();
         }
 
-        private async void LoadSummary()
+        private void LoadTaskSummary()
         {
-            
-            double latitude = 63.63;   
-            double longitude = 21.21; 
-
-            try
-            {
-                // Fetch weather data
-                var weatherData = await WeatherService.GetWeatherData(latitude, longitude);
-
-                //  current weather
-                var current = weatherData.Current;
-                if (current != null)
-                {
-                    weatherSummaryLabel.Text = $"Current Temp: {current.Temperature2m}°C, Wind Speed: {current.WindSpeed10m} m/s";
-                }
-
-                // Display hourly summary 
-                var hourly = weatherData.Hourly;
-                if (hourly != null && hourly.Temperature2m != null && hourly.Temperature2m.Count > 0)
-                {
-                    weatherSummaryLabel.Text += $"\nFirst Hour Temp: {hourly.Temperature2m[0]}°C, Humidity: {hourly.RelativeHumidity2m[0]}%";
-                }
-            }
-            catch (Exception ex)
-            {
-                weatherSummaryLabel.Text = $"Unable to load weather data: {ex.Message}";
-            }
-
-            // todo 
+            // Assuming TodoService is defined and GetTasksCount() returns the number of tasks
             todoSummaryLabel.Text = $"Tasks Today: {TodoService.GetTasksCount()}";
         }
 
