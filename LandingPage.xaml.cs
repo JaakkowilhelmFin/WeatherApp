@@ -18,8 +18,8 @@ namespace WeatherApp
         private async void LoadSummary()
         {
             
-            double latitude = 63;   
-            double longitude = 21; 
+            double latitude = 63.63;   
+            double longitude = 21.21; 
 
             try
             {
