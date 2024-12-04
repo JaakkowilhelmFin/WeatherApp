@@ -13,8 +13,8 @@ namespace WeatherApp
 
         public async void GetWeatherData()
         {
-            double latitude = 63.096;  
-            double longitude = 21.6158;
+            double latitude = 63;  
+            double longitude = 21;
 
             try
             {
